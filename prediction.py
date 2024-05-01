@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import wikipedia
-
+import webbrowser
 # Load the model
 models = joblib.load('crop_app')
 
@@ -56,8 +56,14 @@ def app():
         st.subheader(f"Predicted Crop: {crop_name}")
         
         # Fetch and display crop information from Wikipedia
-        crop_info = get_crop_info(crop_name)
+        crop_name = prediction[0]
+        # crop_info = get_crop_info(crop_name)
         st.subheader("Crop Information from Wikipedia:")
-        st.markdown(crop_info,unsafe_allow_html=True)
+        # st.markdown(crop_info,unsafe_allow_html=True)
+        url=f"https://en.wikipedia.org/wiki/{crop_name}"
 
+        url1 = st.text_input("Enter Wikipedia URL:", url)
+
+        if st.button("Display Wikipedia Page"):
+            st.write(f"Click to move Wikipedia page: {url}")
 
